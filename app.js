@@ -1,4 +1,9 @@
-
+const usuarios = [
+    {user:"alumno1", pass:"1234", rol:"alumno", curso:"4A"},
+    {user:"alumno2", pass:"1234", rol:"alumno", curso:"4A"},
+    {user:"profesor1", pass:"1234", rol:"profesor", curso:"4A"},
+    {user:"director", pass:"1234", rol:"admin"}
+];
 function login(){
 
     let usuario = document.getElementById("usuario").value;
