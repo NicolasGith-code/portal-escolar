@@ -1,5 +1,5 @@
 /* =========================
-   PORTAL ESCOLAR - VERSION ESTABLE
+   PORTAL ESCOLAR - VERSION FINAL ESTABLE
    ========================= */
 
 /* ========= CARGA SEGURA LOCALSTORAGE ========= */
@@ -9,28 +9,37 @@ function cargarStorage(nombre, defecto){
     return data ? JSON.parse(data) : defecto;
 }
 
-/* ========= DATOS ========= */
+/* ========= DATOS DEMO ========= */
 
 let usuarios = cargarStorage("usuarios",[
     {user:"alumno1", pass:"1234", rol:"alumno", curso:"4A"},
+    {user:"alumno2", pass:"1234", rol:"alumno", curso:"4A"},
     {user:"profesor1", pass:"1234", rol:"profesor", curso:"4A"},
     {user:"director", pass:"1234", rol:"admin"}
 ]);
 
 let notas = cargarStorage("notas",[
-    {alumno:"alumno1", asignatura:"Matemáticas", nota:6.5, fecha:"10-03-2026"}
+    {alumno:"alumno1", asignatura:"Matemáticas", nota:6.5, fecha:"10-03-2026"},
+    {alumno:"alumno1", asignatura:"Lenguaje", nota:5.9, fecha:"12-03-2026"},
+    {alumno:"alumno1", asignatura:"Historia", nota:4.3, fecha:"15-03-2026"},
+    {alumno:"alumno2", asignatura:"Matemáticas", nota:5.8, fecha:"11-03-2026"}
 ]);
 
 let tareas = cargarStorage("tareas",[
-    {curso:"4A", texto:"Guía Matemáticas"}
+    {curso:"4A", texto:"Guía Matemáticas página 20"},
+    {curso:"4A", texto:"Resumen Historia independencia"},
+    {curso:"4A", texto:"Experimento Ciencias"}
 ]);
 
 let pruebas = cargarStorage("pruebas",[
-    {curso:"4A", texto:"Prueba Lenguaje"}
+    {curso:"4A", texto:"Prueba Matemáticas 25 Marzo"},
+    {curso:"4A", texto:"Prueba Lenguaje 28 Marzo"}
 ]);
 
 let mensajes = cargarStorage("mensajes",[
-    {usuario:"alumno1", texto:"Estudiar para prueba"}
+    {usuario:"alumno1", texto:"Traer cuaderno mañana"},
+    {usuario:"alumno1", texto:"Entrega tarea viernes"},
+    {usuario:"alumno2", texto:"Estudiar para prueba"}
 ]);
 
 /* ========= GUARDAR ========= */
@@ -47,8 +56,8 @@ function guardarTodo(){
 
 function login(){
 
-    let usuario = document.getElementById("usuario")?.value;
-    let password = document.getElementById("password")?.value;
+    let usuario = document.getElementById("usuario")?.value.trim();
+    let password = document.getElementById("password")?.value.trim();
 
     if(!usuario || !password){
         alert("Ingrese usuario y contraseña");
@@ -83,7 +92,6 @@ function login(){
 function verificarRol(rolPermitido){
     let rol = localStorage.getItem("rol");
     if(rol !== rolPermitido){
-        alert("Acceso no autorizado");
         window.location.href = "index.html";
     }
 }
@@ -94,7 +102,22 @@ function irNotas(){ window.location.href="notas.html"; }
 function irTareas(){ window.location.href="tareas.html"; }
 function irPruebas(){ window.location.href="pruebas.html"; }
 function irMensajes(){ window.location.href="mensajes.html"; }
-function volver(){ window.history.back(); }
+
+/* ========= VOLVER ========= */
+
+function volver(){
+
+    let rol = localStorage.getItem("rol");
+
+    if(rol === "alumno")
+        window.location.href="dashboard-alumno.html";
+
+    if(rol === "profesor")
+        window.location.href="dashboard-profesor.html";
+
+    if(rol === "admin")
+        window.location.href="dashboard-admin.html";
+}
 
 /* ========= NOTAS ALUMNO ========= */
 
@@ -105,10 +128,9 @@ function cargarNotas(){
 
     let usuario = localStorage.getItem("usuario");
 
-    tabla.innerHTML = "";
-
-    let suma = 0;
-    let cantidad = 0;
+    tabla.innerHTML="";
+    let suma=0;
+    let cantidad=0;
 
     notas.forEach(n=>{
 
@@ -124,15 +146,14 @@ function cargarNotas(){
             </tr>
             `;
 
-            suma += parseFloat(n.nota);
+            suma += n.nota;
             cantidad++;
         }
     });
 
     let prom = document.getElementById("promedio");
-    if(prom && cantidad > 0){
-        prom.innerHTML = "Promedio: " + (suma/cantidad).toFixed(2);
-    }
+    if(prom && cantidad>0)
+        prom.innerHTML="Promedio: "+(suma/cantidad).toFixed(2);
 }
 
 /* ========= TAREAS ========= */
@@ -143,13 +164,11 @@ function cargarTareas(){
     if(!lista) return;
 
     let curso = localStorage.getItem("curso");
-
-    lista.innerHTML = "";
+    lista.innerHTML="";
 
     tareas.forEach(t=>{
-        if(t.curso === curso){
-            lista.innerHTML += `<li>${t.texto}</li>`;
-        }
+        if(t.curso===curso)
+            lista.innerHTML+=`<li>${t.texto}</li>`;
     });
 }
 
@@ -161,13 +180,11 @@ function cargarPruebas(){
     if(!lista) return;
 
     let curso = localStorage.getItem("curso");
-
-    lista.innerHTML = "";
+    lista.innerHTML="";
 
     pruebas.forEach(p=>{
-        if(p.curso === curso){
-            lista.innerHTML += `<li>${p.texto}</li>`;
-        }
+        if(p.curso===curso)
+            lista.innerHTML+=`<li>${p.texto}</li>`;
     });
 }
 
@@ -179,14 +196,47 @@ function cargarMensajes(){
     if(!lista) return;
 
     let usuario = localStorage.getItem("usuario");
-
-    lista.innerHTML = "";
+    lista.innerHTML="";
 
     mensajes.forEach(m=>{
-        if(m.usuario === usuario){
-            lista.innerHTML += `<li>${m.texto}</li>`;
-        }
+        if(m.usuario===usuario)
+            lista.innerHTML+=`<li>${m.texto}</li>`;
     });
+}
+
+/* ========= PROFESOR ========= */
+
+function agregarTarea(){
+
+    let texto = prompt("Ingrese tarea");
+    let curso = localStorage.getItem("curso");
+
+    if(texto){
+        tareas.push({curso:curso,texto:texto});
+        guardarTodo();
+        alert("Tarea creada");
+    }
+}
+
+function agregarMensaje(){
+
+    let mensaje = prompt("Mensaje para el curso");
+    let curso = localStorage.getItem("curso");
+
+    if(mensaje){
+
+        usuarios.forEach(u=>{
+            if(u.curso===curso && u.rol==="alumno"){
+                mensajes.push({
+                    usuario:u.user,
+                    texto:mensaje
+                });
+            }
+        });
+
+        guardarTodo();
+        alert("Mensaje enviado");
+    }
 }
 
 /* ========= ADMIN USUARIOS ========= */
@@ -196,12 +246,12 @@ function cargarUsuarios(){
     let lista = document.getElementById("listaUsuarios");
     if(!lista) return;
 
-    lista.innerHTML = "";
+    lista.innerHTML="";
 
     usuarios.forEach(u=>{
-        lista.innerHTML += `
+        lista.innerHTML+=`
         <li onclick="verUsuario('${u.user}')">
-            ${u.user} - ${u.rol} - ${u.curso || "sin curso"}
+        ${u.user} - ${u.rol} - ${u.curso || "sin curso"}
         </li>`;
     });
 }
@@ -215,20 +265,19 @@ function verUsuario(user){
 
 function cargarNotasAdmin(){
 
-    let tabla = document.getElementById("tablaAdminNotas");
+    let tabla=document.getElementById("tablaAdminNotas");
     if(!tabla) return;
 
-    let usuario = localStorage.getItem("usuarioSeleccionado");
-
-    tabla.innerHTML = "";
+    let usuario=localStorage.getItem("usuarioSeleccionado");
+    tabla.innerHTML="";
 
     notas.forEach(n=>{
-        if(n.alumno === usuario){
-            tabla.innerHTML += `
+        if(n.alumno===usuario){
+            tabla.innerHTML+=`
             <tr>
-                <td>${n.asignatura}</td>
-                <td>${n.nota}</td>
-                <td>${n.fecha}</td>
+            <td>${n.asignatura}</td>
+            <td>${n.nota}</td>
+            <td>${n.fecha}</td>
             </tr>`;
         }
     });
@@ -238,59 +287,31 @@ function cargarNotasAdmin(){
 
 function crearUsuario(){
 
-    verificarRol("admin");
-
-    let user = document.getElementById("nuevoUser").value.trim();
-    let pass = document.getElementById("nuevoPass").value.trim();
-    let rol = document.getElementById("nuevoRol").value;
-    let curso = document.getElementById("nuevoCurso").value.trim();
+    let user=document.getElementById("nuevoUser").value.trim();
+    let pass=document.getElementById("nuevoPass").value.trim();
+    let rol=document.getElementById("nuevoRol").value;
+    let curso=document.getElementById("nuevoCurso").value.trim();
 
     if(!user || !pass){
         alert("Complete los campos");
         return;
     }
 
-    if(usuarios.find(u=>u.user === user)){
+    if(usuarios.find(u=>u.user===user)){
         alert("Usuario ya existe");
         return;
     }
 
-    usuarios.push({
-        user:user,
-        pass:pass,
-        rol:rol,
-        curso:curso
-    });
-
+    usuarios.push({user,pass,rol,curso});
     guardarTodo();
     cargarUsuarios();
-
-    document.getElementById("nuevoUser").value="";
-    document.getElementById("nuevoPass").value="";
-    document.getElementById("nuevoCurso").value="";
 
     alert("Usuario creado");
 }
 
-/* ========= volver ========= */
-function volver(){
-
-    let rol = localStorage.getItem("rol");
-
-    if(rol === "alumno")
-        window.location.href = "dashboard-alumno.html";
-
-    if(rol === "profesor")
-        window.location.href = "dashboard-profesor.html";
-
-    if(rol === "admin")
-        window.location.href = "dashboard-admin.html";
-}
-
 /* ========= INIT ========= */
 
-window.onload = function(){
-
+window.onload=function(){
     cargarNotas();
     cargarTareas();
     cargarPruebas();
