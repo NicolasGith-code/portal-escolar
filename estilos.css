@@ -46,3 +46,24 @@ header {
     padding: 20px;
     border-radius: 10px;
 }
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+th {
+    background: #007BFF;
+    color: white;
+}
+
+.contenedor {
+    text-align: center;
+}
