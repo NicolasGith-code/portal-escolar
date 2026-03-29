@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Mis Notas</title>
-    <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
 
-<header>
-    <h1>Mis Notas</h1>
-</header>
+<div class="menu-container">
 
-<div class="contenedor">
-    <table>
-        <thead>
-            <tr>
-                <th>Asignatura</th>
-                <th>Nota</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody id="tablaNotas">
-        </tbody>
-    </table>
-    
-    <div id="promedio"></div>
+<h2>Mis Notas</h2>
 
-    <br>
-    <button onclick="volver()">Volver</button>
+<table>
+<thead>
+<tr>
+<th>Asignatura</th>
+<th>Nota</th>
+<th>Fecha</th>
+</tr>
+</thead>
+
+<tbody id="tablaNotas"></tbody>
+</table>
+
+<h3 id="promedio"></h3>
+
+<button onclick="volver()">Volver</button>
+
 </div>
 
 <script src="app.js"></script>
