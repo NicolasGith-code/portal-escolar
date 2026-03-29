@@ -54,11 +54,10 @@ body{
 
 /* CONTENEDOR NORMAL */
 
-.menu-container{
-    width:50%;
-    margin:auto;
-    margin-top:5vh;
-    text-align:center;
+.menu-container input,
+.menu-container select{
+    width:80%;
+    font-size:18px;
 }
 
 /* TABLAS */
