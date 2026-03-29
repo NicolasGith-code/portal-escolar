@@ -1,6 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="estilos.css">
+</head>
+
 <body>
 
-<h2>Panel Administración</h2>
+<div class="menu-container">
+
+<h2>Panel Administrador</h2>
 
 <h3>Crear Usuario</h3>
 
@@ -13,13 +22,18 @@
     <option value="admin">Administrador</option>
 </select>
 
-<input type="text" id="nuevoCurso" placeholder="Curso (ej: 4A)">
+<input type="text" id="nuevoCurso" placeholder="Curso (Ej: 4A)">
 
 <button onclick="crearUsuario()">Crear Usuario</button>
 
-<h3>Usuarios registrados</h3>
+<hr>
+
+<h3>Lista de Usuarios</h3>
 <ul id="listaUsuarios"></ul>
+
+</div>
 
 <script src="app.js"></script>
 
 </body>
+</html>
