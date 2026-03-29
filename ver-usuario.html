@@ -2,29 +2,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Usuarios</title>
 <link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
 
+<div class="header">
+    <img src="logo.png">
+    <div>
+        <h1>Liceo Científico Humanista</h1>
+        <span>Juan Cortés Monroy - Taltal</span>
+    </div>
+</div>
+
 <div class="menu-container">
 
-<h2>Notas del Usuario</h2>
+<h2>Lista de Usuarios</h2>
 
-<table>
-<thead>
-<tr>
-<th>Asignatura</th>
-<th>Nota</th>
-<th>Fecha</th>
-</tr>
-</thead>
+<ul id="listaUsuarios"></ul>
 
-<tbody id="tablaAdminNotas"></tbody>
+<br>
 
-</table>
+<h2>Crear Usuario</h2>
 
-<button onclick="volver()">Volver</button>
+<button onclick="alert('funciona')">Test</button>
+
+<input type="text" id="nuevoUser" placeholder="Usuario"><br>
+<input type="password" id="nuevoPass" placeholder="Contraseña"><br>
+
+<select id="nuevoRol">
+<option value="alumno">Alumno</option>
+<option value="profesor">Profesor</option>
+<option value="admin">Administrador</option>
+</select><br>
+
+<input type="text" id="nuevoCurso" placeholder="Curso (ej: 4A)"><br>
+
+<button type="button" onclick="crearUsuario()">Crear Usuario</button>
+<button type="button" onclick="volver()">Volver</button>
 
 </div>
 
