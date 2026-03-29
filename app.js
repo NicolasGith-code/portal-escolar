@@ -263,7 +263,7 @@ function cargarUsuarios(){
 
 function verUsuario(user){
     localStorage.setItem("usuarioSeleccionado", user);
-    window.location.href="ver-usuario.html";
+    window.location.href="usuario.html";
 }
 
 /* ========= ADMIN NOTAS ========= */
