@@ -196,3 +196,15 @@ function crearUsuario(){
 
     cargarUsuarios();
 }
+
+function irTareas(){
+    window.location.href = "tareas.html";
+}
+
+function irPruebas(){
+    window.location.href = "pruebas.html";
+}
+
+function irMensajes(){
+    window.location.href = "mensajes.html";
+}
