@@ -283,6 +283,54 @@ function cargarNotasAdmin(){
     });
 }
 
+/* ========= PROFESOR AGREGAR NOTAS ========= */
+
+function cargarFormularioProfesor(){
+
+    let select = document.getElementById("alumnoNota");
+    if(!select) return;
+
+    let curso = localStorage.getItem("curso");
+
+    select.innerHTML = "";
+
+    usuarios.forEach(u=>{
+        if(u.rol === "alumno" && u.curso === curso){
+            select.innerHTML += `<option value="${u.user}">${u.user}</option>`;
+        }
+    });
+}
+
+function agregarNota(){
+
+    verificarRol("profesor");
+
+    let alumno = document.getElementById("alumnoNota").value;
+    let asignatura = document.getElementById("asignaturaNota").value.trim();
+    let nota = document.getElementById("valorNota").value;
+    let fecha = document.getElementById("fechaNota").value;
+
+    if(!alumno || !asignatura || !nota || !fecha){
+        alert("Complete todos los campos");
+        return;
+    }
+
+    notas.push({
+        alumno: alumno,
+        asignatura: asignatura,
+        nota: parseFloat(nota),
+        fecha: fecha
+    });
+
+    guardarTodo();
+
+    document.getElementById("asignaturaNota").value="";
+    document.getElementById("valorNota").value="";
+    document.getElementById("fechaNota").value="";
+
+    alert("Nota agregada correctamente");
+}
+
 /* ========= CREAR USUARIO ========= */
 
 function crearUsuario(){
