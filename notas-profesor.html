@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<div class="menu-container">
+
+<h2>Agregar Nota</h2>
+
+<label>Alumno</label><br>
+<select id="alumnoNota"></select><br>
+
+<label>Asignatura</label><br>
+<input type="text" id="asignaturaNota"><br>
+
+<label>Nota</label><br>
+<input type="number" step="0.1" min="1" max="7" id="valorNota"><br>
+
+<label>Fecha</label><br>
+<input type="date" id="fechaNota"><br>
+
+<button onclick="agregarNota()">Guardar Nota</button>
+<button onclick="volver()">Volver</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
