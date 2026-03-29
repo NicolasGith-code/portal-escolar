@@ -1,12 +1,25 @@
 
-function login() {
+function login(){
+
     let usuario = document.getElementById("usuario").value;
     let password = document.getElementById("password").value;
 
-    // Login de prueba
+    // alumno
     if(usuario === "alumno" && password === "1234"){
         window.location.href = "dashboard-alumno.html";
-    } else {
+    }
+
+    // profesor
+    else if(usuario === "profesor" && password === "1234"){
+        window.location.href = "dashboard-profesor.html";
+    }
+
+    // director
+    else if(usuario === "director" && password === "1234"){
+        window.location.href = "dashboard-director.html";
+    }
+
+    else{
         alert("Usuario o contraseña incorrectos");
     }
 }
