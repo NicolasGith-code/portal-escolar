@@ -1,9 +1,29 @@
+// ===============================
+// USUARIOS DEL SISTEMA
+// ===============================
 const usuarios = [
     {user:"alumno1", pass:"1234", rol:"alumno", curso:"4A"},
     {user:"alumno2", pass:"1234", rol:"alumno", curso:"4A"},
     {user:"profesor1", pass:"1234", rol:"profesor", curso:"4A"},
     {user:"director", pass:"1234", rol:"admin"}
 ];
+
+// ===============================
+// BASE DE DATOS DE NOTAS
+// ===============================
+const notas = [
+    {alumno:"alumno1", asignatura:"Matemáticas", nota:6.5, fecha:"10-03-2026"},
+    {alumno:"alumno1", asignatura:"Lenguaje", nota:5.8, fecha:"12-03-2026"},
+    {alumno:"alumno1", asignatura:"Historia", nota:3.9, fecha:"15-03-2026"},
+    {alumno:"alumno1", asignatura:"Ciencias", nota:6.9, fecha:"18-03-2026"},
+
+    {alumno:"alumno2", asignatura:"Matemáticas", nota:5.5, fecha:"10-03-2026"},
+    {alumno:"alumno2", asignatura:"Lenguaje", nota:6.1, fecha:"12-03-2026"}
+];
+
+// ===============================
+// LOGIN
+// ===============================
 function login(){
 
     let usuario = document.getElementById("usuario").value;
@@ -32,10 +52,13 @@ function login(){
         }
 
     }else{
-        alert("Usuario incorrecto");
+        alert("Usuario o contraseña incorrectos");
     }
 }
 
+// ===============================
+// SEGURIDAD POR ROL
+// ===============================
 function verificarRol(rolPermitido){
 
     let rol = localStorage.getItem("rol");
@@ -46,6 +69,9 @@ function verificarRol(rolPermitido){
     }
 }
 
+// ===============================
+// NAVEGACIÓN
+// ===============================
 function irNotas(){
     window.location.href = "notas.html";
 }
@@ -54,43 +80,87 @@ function volver(){
     window.location.href = "dashboard-alumno.html";
 }
 
+// ===============================
+// CARGAR NOTAS ALUMNO
+// ===============================
 function cargarNotas(){
-    const notas = [
-        {asignatura: "Matemáticas", nota: 6.5, fecha: "10-03-2026"},
-        {asignatura: "Lenguaje", nota: 5.8, fecha: "12-03-2026"},
-        {asignatura: "Historia", nota: 3.9, fecha: "15-03-2026"},
-        {asignatura: "Ciencias", nota: 6.9, fecha: "18-03-2026"}
-    ];
 
+    verificarRol("alumno");
+
+    let usuario = localStorage.getItem("usuario");
     let tabla = document.getElementById("tablaNotas");
+
+    if(!tabla) return;
+
+    tabla.innerHTML = "";
+
     let suma = 0;
+    let contador = 0;
 
-    notas.forEach(nota => {
+    notas.forEach(n => {
 
-        let color = nota.nota < 4.0 ? "red" : "black";
+        if(n.alumno === usuario){
 
-        let fila = `
-            <tr>
-                <td>${nota.asignatura}</td>
-                <td style="color:${color}; font-weight:bold;">
-                    ${nota.nota}
-                </td>
-                <td>${nota.fecha}</td>
-            </tr>
-        `;
+            let color = n.nota < 4 ? "red" : "black";
 
-        tabla.innerHTML += fila;
-        suma += nota.nota;
+            tabla.innerHTML += `
+                <tr>
+                    <td>${n.asignatura}</td>
+                    <td style="color:${color}; font-weight:bold;">
+                        ${n.nota}
+                    </td>
+                    <td>${n.fecha}</td>
+                </tr>
+            `;
+
+            suma += n.nota;
+            contador++;
+        }
     });
 
-    let promedio = (suma / notas.length).toFixed(2);
-
-    document.getElementById("promedio").innerHTML =
-        "Promedio General: " + promedio;
+    if(contador > 0){
+        let promedio = (suma / contador).toFixed(2);
+        document.getElementById("promedio").innerHTML =
+            "Promedio General: " + promedio;
+    }
 }
 
+// ===============================
+// PANEL PROFESOR
+// ===============================
+function cargarCursoProfesor(){
+
+    verificarRol("profesor");
+
+    let curso = localStorage.getItem("curso");
+    let lista = document.getElementById("listaAlumnos");
+
+    if(!lista) return;
+
+    lista.innerHTML = "";
+
+    usuarios.forEach(u => {
+
+        if(u.rol === "alumno" && u.curso === curso){
+
+            lista.innerHTML += `
+                <li>${u.user}</li>
+            `;
+        }
+    });
+}
+
+// ===============================
+// CONTROL AUTOMÁTICO
+// ===============================
 window.onload = function(){
+
     if(document.getElementById("tablaNotas")){
         cargarNotas();
     }
-}
+
+    if(document.getElementById("listaAlumnos")){
+        cargarCursoProfesor();
+    }
+
+};
