@@ -164,3 +164,49 @@ window.onload = function(){
     }
 
 };
+
+// ===============================
+// CARGAR USUARIOS
+// ===============================
+
+function crearUsuario(){
+
+    verificarRol("admin");
+
+    let user = document.getElementById("nuevoUser").value;
+    let pass = document.getElementById("nuevoPass").value;
+    let rol = document.getElementById("nuevoRol").value;
+    let curso = document.getElementById("nuevoCurso").value;
+
+    usuarios.push({
+        user:user,
+        pass:pass,
+        rol:rol,
+        curso:curso
+    });
+
+    alert("Usuario creado correctamente");
+
+    cargarUsuarios();
+}
+
+
+function cargarUsuarios(){
+
+    verificarRol("admin");
+
+    let lista = document.getElementById("listaUsuarios");
+
+    if(!lista) return;
+
+    lista.innerHTML = "";
+
+    usuarios.forEach(u => {
+
+        lista.innerHTML += `
+            <li>
+                ${u.user} - ${u.rol} - ${u.curso || "sin curso"}
+            </li>
+        `;
+    });
+}
