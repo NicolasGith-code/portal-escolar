@@ -1,40 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard Alumno</title>
-    <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
 
-<header>
-    <h1>Panel del Alumno</h1>
-</header>
+<div class="menu-container">
 
-<div class="dashboard">
+<h2>Panel Alumno</h2>
 
-    <div class="card" onclick="irNotas()">
-        <h3>Mis Notas</h3>
-        <p>Ver calificaciones</p>
-    </div>
-    
-    <div class="card">
-        <h3>Tareas</h3>
-        <p>Tareas pendientes</p>
-    </div>
-
-    <div class="card">
-        <h3>Pruebas</h3>
-        <p>Fechas importantes</p>
-    </div>
-
-    <div class="card">
-        <h3>Mensajes</h3>
-        <p>Comunicados profesores</p>
-    </div>
+<button onclick="irNotas()">Mis Notas</button>
+<button onclick="irTareas()">Tareas</button>
+<button onclick="irPruebas()">Pruebas</button>
+<button onclick="irMensajes()">Mensajes</button>
 
 </div>
+
+<script src="app.js"></script>
 
 </body>
 </html>
