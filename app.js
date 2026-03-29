@@ -163,6 +163,10 @@ window.onload = function(){
         cargarCursoProfesor();
     }
 
+    if(document.getElementById("listaUsuarios")){
+        cargarUsuarios();
+    }
+
 };
 
 // ===============================
