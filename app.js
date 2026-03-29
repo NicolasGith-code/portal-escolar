@@ -359,11 +359,13 @@ function crearUsuario(){
 
 /* ========= INIT ========= */
 
-window.onload=function(){
+window.onload = function(){
+
     cargarNotas();
     cargarTareas();
     cargarPruebas();
     cargarMensajes();
     cargarUsuarios();
     cargarNotasAdmin();
+    cargarFormularioProfesor();   // ← NUEVO
 };
