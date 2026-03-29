@@ -22,22 +22,35 @@ function cargarNotas(){
     const notas = [
         {asignatura: "Matemáticas", nota: 6.5, fecha: "10-03-2026"},
         {asignatura: "Lenguaje", nota: 5.8, fecha: "12-03-2026"},
-        {asignatura: "Historia", nota: 6.2, fecha: "15-03-2026"},
+        {asignatura: "Historia", nota: 3.9, fecha: "15-03-2026"},
         {asignatura: "Ciencias", nota: 6.9, fecha: "18-03-2026"}
     ];
 
     let tabla = document.getElementById("tablaNotas");
+    let suma = 0;
 
     notas.forEach(nota => {
+
+        let color = nota.nota < 4.0 ? "red" : "black";
+
         let fila = `
             <tr>
                 <td>${nota.asignatura}</td>
-                <td>${nota.nota}</td>
+                <td style="color:${color}; font-weight:bold;">
+                    ${nota.nota}
+                </td>
                 <td>${nota.fecha}</td>
             </tr>
         `;
+
         tabla.innerHTML += fila;
+        suma += nota.nota;
     });
+
+    let promedio = (suma / notas.length).toFixed(2);
+
+    document.getElementById("promedio").innerHTML =
+        "Promedio General: " + promedio;
 }
 
 window.onload = function(){
