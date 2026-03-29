@@ -1,7 +1,7 @@
 // ===============================
 // USUARIOS DEL SISTEMA
 // ===============================
-const usuarios = [
+let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [
     {user:"alumno1", pass:"1234", rol:"alumno", curso:"4A"},
     {user:"alumno2", pass:"1234", rol:"alumno", curso:"4A"},
     {user:"profesor1", pass:"1234", rol:"profesor", curso:"4A"},
@@ -170,7 +170,7 @@ window.onload = function(){
 };
 
 // ===============================
-// CARGAR USUARIOS
+// CREAR USUARIOS
 // ===============================
 
 function crearUsuario(){
@@ -189,28 +189,10 @@ function crearUsuario(){
         curso:curso
     });
 
+    // GUARDAR PERMANENTE
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
     alert("Usuario creado correctamente");
 
     cargarUsuarios();
-}
-
-
-function cargarUsuarios(){
-
-    verificarRol("admin");
-
-    let lista = document.getElementById("listaUsuarios");
-
-    if(!lista) return;
-
-    lista.innerHTML = "";
-
-    usuarios.forEach(u => {
-
-        lista.innerHTML += `
-            <li>
-                ${u.user} - ${u.rol} - ${u.curso || "sin curso"}
-            </li>
-        `;
-    });
 }
