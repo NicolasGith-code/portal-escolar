@@ -9,23 +9,30 @@ function login(){
     let usuario = document.getElementById("usuario").value;
     let password = document.getElementById("password").value;
 
-    // alumno
-    if(usuario === "alumno" && password === "1234"){
-        window.location.href = "dashboard-alumno.html";
-    }
+    let encontrado = usuarios.find(u => 
+        u.user === usuario && u.pass === password
+    );
 
-    // profesor
-    else if(usuario === "profesor" && password === "1234"){
-        window.location.href = "dashboard-profesor.html";
-    }
+    if(encontrado){
 
-    // director
-    else if(usuario === "director" && password === "1234"){
-        window.location.href = "dashboard-director.html";
-    }
+        localStorage.setItem("usuario", encontrado.user);
+        localStorage.setItem("rol", encontrado.rol);
+        localStorage.setItem("curso", encontrado.curso);
 
-    else{
-        alert("Usuario o contraseña incorrectos");
+        if(encontrado.rol === "alumno"){
+            window.location.href = "dashboard-alumno.html";
+        }
+
+        if(encontrado.rol === "profesor"){
+            window.location.href = "dashboard-profesor.html";
+        }
+
+        if(encontrado.rol === "admin"){
+            window.location.href = "dashboard-admin.html";
+        }
+
+    }else{
+        alert("Usuario incorrecto");
     }
 }
 function irNotas(){
