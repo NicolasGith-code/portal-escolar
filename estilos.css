@@ -1,88 +1,28 @@
-
-body {
+body{
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    margin: 0;
+    background:#f8f6f4;
+    margin:0;
 }
 
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    padding: 20px;
-    background: white;
-    text-align: center;
-    border-radius: 10px;
+/* PANEL GRID */
+
+.panel{
+    width:60vw;
+    height:60vh;
+    margin:auto;
+    margin-top:10vh;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:20px;
 }
 
-input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-button {
-    padding: 10px;
-    width: 100%;
-    background: #007BFF;
-    color: white;
-    border: none;
-}
-
-header {
-    background: #007BFF;
-    color: white;
-    padding: 15px;
-}
-
-.dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    padding: 20px;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-}
-table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background: white;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-th {
-    background: #007BFF;
-    color: white;
-}
-
-.contenedor {
-    text-align: center;
-}
-.panel-alumno{
-    width: 60vw;
-    height: 60vh;
-    margin: auto;
-    margin-top: 10vh;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 20px;
-}
+/* TARJETAS */
 
 .card{
     border:none;
-    border-radius:20px;
-    font-size:28px;
+    border-radius:18px;
     cursor:pointer;
 
     display:flex;
@@ -90,8 +30,13 @@ th {
     align-items:center;
     justify-content:center;
 
-    background:#f5f7fa;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-size:30px;
+    font-weight:bold;
+
+    background:#800020; /* burdeo */
+    color:#FFD700; /* dorado */
+
+    box-shadow:0 6px 12px rgba(0,0,0,0.2);
 
     transition:0.2s;
 }
@@ -99,9 +44,58 @@ th {
 .card span{
     font-size:18px;
     margin-top:10px;
+    color:white;
 }
 
 .card:hover{
     transform:scale(1.05);
-    background:#e9eef5;
+    background:#660018;
+}
+
+/* CONTENEDOR NORMAL */
+
+.menu-container{
+    width:50%;
+    margin:auto;
+    margin-top:5vh;
+    text-align:center;
+}
+
+/* TABLAS */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#800020;
+    color:#FFD700;
+    padding:10px;
+}
+
+td{
+    padding:8px;
+    border-bottom:1px solid #ddd;
+}
+
+/* BOTONES */
+
+button{
+    background:#800020;
+    color:#FFD700;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#660018;
+}
+
+input, select{
+    padding:8px;
+    margin:5px;
 }
