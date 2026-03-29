@@ -77,14 +77,19 @@ function login(){
     localStorage.setItem("rol", encontrado.rol);
     localStorage.setItem("curso", encontrado.curso || "");
 
-    if(encontrado.rol === "alumno")
-        window.location.href = "dashboard-alumno.html";
+   if(encontrado.rol === "alumno"){
+    window.location.href = "./dashboard-alumno.html";
+    return;
+}
 
-    if(encontrado.rol === "profesor")
-        window.location.href = "dashboard-profesor.html";
+if(encontrado.rol === "profesor"){
+    window.location.href = "./dashboard-profesor.html";
+    return;
+}
 
-    if(encontrado.rol === "admin")
-        window.location.href = "dashboard-admin.html";
+if(encontrado.rol === "admin"){
+    window.location.href = "./dashboard-admin.html";
+    return;
 }
 
 /* ========= SEGURIDAD ========= */
@@ -110,13 +115,13 @@ function volver(){
     let rol = localStorage.getItem("rol");
 
     if(rol === "alumno")
-        window.location.href="dashboard-alumno.html";
+        window.location.href = "./dashboard-alumno.html";
 
     if(rol === "profesor")
-        window.location.href="dashboard-profesor.html";
+        window.location.href = "./dashboard-profesor.html";
 
     if(rol === "admin")
-        window.location.href="dashboard-admin.html";
+        window.location.href = "./dashboard-admin.html";
 }
 
 /* ========= NOTAS ALUMNO ========= */
