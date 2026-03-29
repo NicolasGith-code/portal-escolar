@@ -67,3 +67,41 @@ th {
 .contenedor {
     text-align: center;
 }
+.panel-alumno{
+    width: 60vw;
+    height: 60vh;
+    margin: auto;
+    margin-top: 10vh;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+}
+
+.card{
+    border:none;
+    border-radius:20px;
+    font-size:28px;
+    cursor:pointer;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:#f5f7fa;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+    transition:0.2s;
+}
+
+.card span{
+    font-size:18px;
+    margin-top:10px;
+}
+
+.card:hover{
+    transform:scale(1.05);
+    background:#e9eef5;
+}
