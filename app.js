@@ -253,3 +253,42 @@ window.onload = function(){
     if(document.getElementById("listaUsuarios")) cargarUsuarios();
     if(document.getElementById("tablaAdminNotas")) cargarNotasAdmin();
 };
+function crearUsuario(){
+
+    verificarRol("admin");
+
+    let user = document.getElementById("nuevoUser").value;
+    let pass = document.getElementById("nuevoPass").value;
+    let rol = document.getElementById("nuevoRol").value;
+    let curso = document.getElementById("nuevoCurso").value;
+
+    if(user === "" || pass === ""){
+        alert("Complete los datos");
+        return;
+    }
+
+    let existe = usuarios.find(u => u.user === user);
+
+    if(existe){
+        alert("Usuario ya existe");
+        return;
+    }
+
+    let nuevo = {
+        user: user,
+        pass: pass,
+        rol: rol,
+        curso: curso
+    };
+
+    usuarios.push(nuevo);
+
+    guardarTodo();
+    cargarUsuarios();
+
+    document.getElementById("nuevoUser").value = "";
+    document.getElementById("nuevoPass").value = "";
+    document.getElementById("nuevoCurso").value = "";
+
+    alert("Usuario creado correctamente");
+}
