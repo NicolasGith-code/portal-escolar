@@ -2,7 +2,23 @@
 
 <h2>Panel Administración</h2>
 
-<p>Gestión del sistema</p>
+<h3>Crear Usuario</h3>
+
+<input type="text" id="nuevoUser" placeholder="Usuario">
+<input type="password" id="nuevoPass" placeholder="Contraseña">
+
+<select id="nuevoRol">
+    <option value="alumno">Alumno</option>
+    <option value="profesor">Profesor</option>
+    <option value="admin">Administrador</option>
+</select>
+
+<input type="text" id="nuevoCurso" placeholder="Curso (ej: 4A)">
+
+<button onclick="crearUsuario()">Crear Usuario</button>
+
+<h3>Usuarios registrados</h3>
+<ul id="listaUsuarios"></ul>
 
 <script src="app.js"></script>
 
