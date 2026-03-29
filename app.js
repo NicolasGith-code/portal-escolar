@@ -335,28 +335,37 @@ function agregarNota(){
 
 function crearUsuario(){
 
-    let user=document.getElementById("nuevoUser").value.trim();
-    let pass=document.getElementById("nuevoPass").value.trim();
-    let rol=document.getElementById("nuevoRol").value;
-    let curso=document.getElementById("nuevoCurso").value.trim();
+    let user = document.getElementById("nuevoUser").value.trim();
+    let pass = document.getElementById("nuevoPass").value.trim();
+    let rol = document.getElementById("nuevoRol").value;
+    let curso = document.getElementById("nuevoCurso").value.trim();
 
     if(!user || !pass){
         alert("Complete los campos");
         return;
     }
 
-    if(usuarios.find(u=>u.user===user)){
+    if(usuarios.find(u => u.user === user)){
         alert("Usuario ya existe");
         return;
     }
 
-    usuarios.push({user,pass,rol,curso});
+    usuarios.push({
+        user:user,
+        pass:pass,
+        rol:rol,
+        curso:curso
+    });
+
     guardarTodo();
     cargarUsuarios();
 
+    document.getElementById("nuevoUser").value="";
+    document.getElementById("nuevoPass").value="";
+    document.getElementById("nuevoCurso").value="";
+
     alert("Usuario creado");
 }
-
 /* ========= INIT ========= */
 
 window.onload = function(){
