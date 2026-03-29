@@ -35,6 +35,17 @@ function login(){
         alert("Usuario incorrecto");
     }
 }
+
+function verificarRol(rolPermitido){
+
+    let rol = localStorage.getItem("rol");
+
+    if(rol !== rolPermitido){
+        alert("Acceso no autorizado");
+        window.location.href = "index.html";
+    }
+}
+
 function irNotas(){
     window.location.href = "notas.html";
 }
