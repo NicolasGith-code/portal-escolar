@@ -272,6 +272,21 @@ function crearUsuario(){
     alert("Usuario creado");
 }
 
+/* ========= volver ========= */
+function volver(){
+
+    let rol = localStorage.getItem("rol");
+
+    if(rol === "alumno")
+        window.location.href = "dashboard-alumno.html";
+
+    if(rol === "profesor")
+        window.location.href = "dashboard-profesor.html";
+
+    if(rol === "admin")
+        window.location.href = "dashboard-admin.html";
+}
+
 /* ========= INIT ========= */
 
 window.onload = function(){
